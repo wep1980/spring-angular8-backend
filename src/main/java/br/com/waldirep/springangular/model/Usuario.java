@@ -45,6 +45,14 @@ public class Usuario implements Serializable{
 		return id;
 	}
 
+	public List<Telefone> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
