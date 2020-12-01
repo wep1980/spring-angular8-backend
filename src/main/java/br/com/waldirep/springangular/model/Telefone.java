@@ -23,7 +23,7 @@ public class Telefone implements Serializable{
 	private String numero;
 	
 	@JsonIgnore // Evita a recursividade de pegar todos os resultados
-	@ManyToOne // Muitos telefones para 1 usuario
+	@ManyToOne(optional = false) // Muitos telefones para 1 usuario -- optional = false -> Para cadastrar o telefone e obrigatorio ter o pai
     @org.hibernate.annotations.ForeignKey(name = "usuario_id")
 	private Usuario usuario;
 	

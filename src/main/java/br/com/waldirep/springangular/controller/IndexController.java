@@ -87,12 +87,16 @@ public class IndexController {
 	
 	
 	/**
-	 * Metodo que salva um usuario
+	 * Metodo que salva um usuario e os telefones
 	 * @param usuario
 	 * @return
 	 */
 	@PostMapping(value = "/")
 	public ResponseEntity<Usuario> cadastrar(@RequestBody Usuario usuario){
+		
+		for(int pos = 0; pos < usuario.getTelefones().size(); pos++) {
+			usuario.getTelefones().get(pos).setUsuario(usuario);
+		}
 		
 		Usuario user = usuarioRepository.save(usuario);
 		
