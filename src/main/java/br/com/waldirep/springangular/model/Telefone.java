@@ -1,45 +1,32 @@
 package br.com.waldirep.springangular.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Usuario implements Serializable{
-
+public class Telefone implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
 	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	private String nome;
+	private String numero;
 	
-	private String login;
-	
-	private String senha;
-	
-	/* orphanRemoval = true -> Ao deletar o usuario apaga os telefones
-	 * cascade = CascadeType.ALL -> Operação sempre em cascata*/
-	@OneToMany(mappedBy = "usuario", orphanRemoval = true, cascade = CascadeType.ALL)
-	private List<Telefone> telefones = new ArrayList<Telefone>();
+	@ManyToOne // Muitos telefones para 1 usuario
+    @org.hibernate.annotations.ForeignKey(name = "usuario_id")
+	private Usuario usuario;
 	
 	
-	public String getNome() {
-		return nome;
-	}
 	
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+	
 
 	public Long getId() {
 		return id;
@@ -49,21 +36,20 @@ public class Usuario implements Serializable{
 		this.id = id;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getNumero() {
+		return numero;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 
-
-	public String getSenha() {
-		return senha;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override
@@ -82,7 +68,7 @@ public class Usuario implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		Telefone other = (Telefone) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -93,6 +79,6 @@ public class Usuario implements Serializable{
 	
 	
 	
-
 	
+
 }
